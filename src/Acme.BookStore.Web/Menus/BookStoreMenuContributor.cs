@@ -35,15 +35,30 @@ public class BookStoreMenuContributor : IMenuContributor
             )
         );
 
-        context.Menu.Items.Insert(
-            1,
+        context.Menu.AddItem(
             new ApplicationMenuItem(
-            "Dashboard",
-           "Dashboard",
-            url: "/",
-            icon: "fas fa-home"
-        )// remove permission check for testing
-       );
+                "BooksStore",
+                l["Menu:BookStore"],
+                icon:"fa fa-book"
+            ).AddItem(
+               new ApplicationMenuItem(
+                    "BooksStore.Books",
+                    l["Menu:Books"],
+                    url:"/Books"
+                    )
+                )
+            );
+
+       // context.Menu.Items.Insert(
+       //     1,
+       //     new ApplicationMenuItem(
+       //     "Dashboard",
+       //    "Dashboard",
+       //     url: "/",
+       //     icon: "fas fa-home"
+       // )// remove permission check for testing
+       //);
+        
 
         if (MultiTenancyConsts.IsEnabled)
         {
