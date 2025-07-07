@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Acme.BookStore.Localization;
 using Acme.BookStore.MultiTenancy;
+using Acme.BookStore.Permissions;
 using Volo.Abp.Authorization.Permissions;
 using Volo.Abp.Identity.Web.Navigation;
 using Volo.Abp.SettingManagement.Web.Navigation;
@@ -39,26 +40,26 @@ public class BookStoreMenuContributor : IMenuContributor
             new ApplicationMenuItem(
                 "BooksStore",
                 l["Menu:BookStore"],
-                icon:"fa fa-book"
+                icon: "fa fa-book"
             ).AddItem(
-               new ApplicationMenuItem(
+                new ApplicationMenuItem(
                     "BooksStore.Books",
                     l["Menu:Books"],
-                    url:"/Books"
-                    )
-                )
-            );
+                    url: "/Books"
+                ).RequirePermissions(BookStorePermissions.Books.Default) // Check the permission!
+            )
+        );
 
-       // context.Menu.Items.Insert(
-       //     1,
-       //     new ApplicationMenuItem(
-       //     "Dashboard",
-       //    "Dashboard",
-       //     url: "/",
-       //     icon: "fas fa-home"
-       // )// remove permission check for testing
-       //);
-        
+        // context.Menu.Items.Insert(
+        //     1,
+        //     new ApplicationMenuItem(
+        //     "Dashboard",
+        //    "Dashboard",
+        //     url: "/",
+        //     icon: "fas fa-home"
+        // )// remove permission check for testing
+        //);
+
 
         if (MultiTenancyConsts.IsEnabled)
         {
